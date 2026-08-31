@@ -4,7 +4,7 @@ Neon cyberpunk theme for the [Goose](https://github.com/block/goose) desktop app
 
 Deep void backgrounds, **magenta user input**, **cyan AI replies**, **lime terminal/code**, larger type, and Orbitron / Rajdhani / Share Tech Mono fonts.
 
-Works on **Linux** and **macOS**. Patches Goose’s packaged Electron `app.asar` (with automatic stock backup).
+Works on **Linux** and **macOS**. Patches Goose’s packaged Electron `app.asar` (with automatic stock backup). On macOS, the installer also refreshes Electron’s ASAR-integrity metadata and re-signs the app locally; this is required by current Goose releases.
 
 > Goose does not ship a public theme API, so this rewrites UI tokens + injects CSS inside the app bundle. Re-apply after Goose updates (or install the permanent helper).
 
@@ -30,6 +30,7 @@ Full token table: [`docs/color-scheme.md`](docs/color-scheme.md)
 - [Node.js](https://nodejs.org/) 18+ (`npx` used to pack/unpack asar)
 - `python3`
 - Write access to Goose’s `app.asar` (sudo / admin password once)
+- On macOS, permission for the terminal app to manage applications (**System Settings → Privacy & Security → App Management**) if Goose is installed in `/Applications`
 
 ---
 
@@ -142,6 +143,9 @@ goose-cyberpunk/
 ---
 
 ## Troubleshooting
+
+**Goose crashes immediately after applying the theme (macOS)**
+Update this repository and run `./scripts/apply-theme.sh` again. Current Goose builds enforce Electron ASAR integrity; the script now recalculates that header hash and re-signs the modified local app. If macOS says `Operation not permitted`, enable App Management for your terminal app in System Settings, then re-run the script.
 
 **Theme didn’t change**  
 Fully quit Goose (check system tray / menu bar) and reopen. Electron caches the old asar until process exit.

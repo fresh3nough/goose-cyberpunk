@@ -113,6 +113,52 @@ write_root() {
   die "cannot write $dst (need sudo)"
 }
 
+macos_refresh_integrity_and_signature() {
+  local asar="$1" app_root plist staged_plist header_hash
+  [[ "$(uname -s)" == "Darwin" ]] || return 0
+
+  app_root="$(cd "$(dirname "$asar")/../.." && pwd)"
+  plist="$app_root/Contents/Info.plist"
+  [[ -f "$plist" ]] || die "could not find Info.plist for $app_root"
+
+  # Electron validates the SHA-256 of the raw ASAR JSON header at startup. A
+  # repacked archive has a new header, so the packaged value must be refreshed.
+  header_hash="$(python3 - "$asar" <<'PY'
+import hashlib, struct, sys
+with open(sys.argv[1], "rb") as archive:
+    prefix = archive.read(16)
+    if len(prefix) != 16:
+        raise SystemExit("ASAR is too small")
+    header_size = struct.unpack_from("<I", prefix, 12)[0]
+    header = archive.read(header_size)
+    if len(header) != header_size:
+        raise SystemExit("ASAR header is truncated")
+print(hashlib.sha256(header).hexdigest())
+PY
+)" || die "could not calculate ASAR header hash"
+
+  staged_plist="$WORK_DIR/out/Info.plist"
+  cp -a "$plist" "$staged_plist"
+  /usr/libexec/PlistBuddy -c "Set :ElectronAsarIntegrity:Resources/app.asar:algorithm SHA256" "$staged_plist" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :ElectronAsarIntegrity:Resources/app.asar:algorithm string SHA256" "$staged_plist"
+  /usr/libexec/PlistBuddy -c "Set :ElectronAsarIntegrity:Resources/app.asar:hash $header_hash" "$staged_plist"
+
+  log "updating Electron ASAR integrity metadata"
+  write_root "$staged_plist" "$plist"
+
+  # Updating Info.plist invalidates the vendor signature. Re-signing ad hoc is
+  # sufficient for local use and keeps macOS and Electron in agreement.
+  log "re-signing macOS app bundle for local use"
+  if [[ -w "$app_root" ]]; then
+    codesign --force --deep --sign - "$app_root"
+  elif command -v sudo >/dev/null 2>&1; then
+    sudo codesign --force --deep --sign - "$app_root"
+  else
+    die "cannot re-sign $app_root (need write access to the app bundle)"
+  fi
+  codesign --verify --deep --strict --verbose=2 "$app_root" || die "macOS signature verification failed"
+}
+
 force_dark_settings() {
   local settings
   settings="$(find_settings_json)"
@@ -338,6 +384,7 @@ main() {
 
   log "installing themed asar (may ask for password)..."
   write_root "$WORK_DIR/out/app.asar" "$asar"
+  macos_refresh_integrity_and_signature "$asar"
 
   local settings_path
   settings_path="$(force_dark_settings)"
