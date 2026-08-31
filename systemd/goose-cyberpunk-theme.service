@@ -1,0 +1,12 @@
+[Unit]
+Description=Apply Goose neon cyberpunk desktop theme
+After=default.target
+
+[Service]
+Type=oneshot
+# Update this path after clone:
+ExecStart=%h/github/goose-cyberpunk/scripts/apply-theme.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

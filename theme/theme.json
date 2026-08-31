@@ -1,0 +1,23 @@
+{
+  "name": "cyberpunk-neon",
+  "version": "1.1.0",
+  "description": "Neon cyberpunk theme for the Goose desktop app",
+  "scheme": {
+    "background": "#07070f",
+    "backgroundSecondary": "#0e0e1a",
+    "backgroundTertiary": "#16162a",
+    "userInput": "#ff9aef",
+    "userMessage": "#ff4fd8",
+    "aiResponse": "#7df9ff",
+    "terminal": "#39ff14",
+    "accentMagenta": "#ff00aa",
+    "accentCyan": "#00e5ff",
+    "textPrimary": "#e8f6ff",
+    "textSecondary": "#8ab4c8"
+  },
+  "fonts": {
+    "ui": "Rajdhani",
+    "display": "Orbitron",
+    "mono": "Share Tech Mono"
+  }
+}

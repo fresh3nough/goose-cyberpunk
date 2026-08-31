@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch Goose app.asar and re-apply cyberpunk theme
+
+[Path]
+PathModified=/usr/lib/goose/resources/app.asar
+PathChanged=/usr/lib/goose/resources/app.asar
+Unit=goose-cyberpunk-theme.service
+
+[Install]
+WantedBy=default.target
