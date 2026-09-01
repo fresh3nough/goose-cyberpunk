@@ -53,6 +53,20 @@ find_asar() {
         "$HOME/.local/share/Goose/resources/app.asar"
         "$HOME/squashfs-root/resources/app.asar"
       )
+      # dpkg-installed desktop binary path (symlink target dir)
+      if command -v goose >/dev/null 2>&1; then
+        local goose_bin goose_dir
+        goose_bin="$(command -v goose)"
+        if [[ -L "$goose_bin" ]]; then
+          goose_bin="$(readlink -f "$goose_bin" 2>/dev/null || readlink "$goose_bin")"
+        fi
+        goose_dir="$(dirname "$goose_bin")"
+        candidates+=("$goose_dir/resources/app.asar")
+      fi
+      # Broad search under common prefixes (bounded)
+      while IFS= read -r p; do candidates+=("$p"); done < <(
+        find /usr/lib /usr/lib64 /opt "$HOME/.local" -path '*/goose*/resources/app.asar' 2>/dev/null | head -20
+      )
       # Flatpak
       if [[ -d "$HOME/.local/share/flatpak/app" ]]; then
         while IFS= read -r p; do candidates+=("$p"); done < <(find "$HOME/.local/share/flatpak/app" -path '*/resources/app.asar' 2>/dev/null | head -20)
@@ -81,7 +95,24 @@ find_settings_json() {
   esac
 }
 
+# Prefer system npx, then Goose-bundled Electron helper binaries, then global asar.
 ensure_asar_tools() {
+  # Goose desktop ships node/npx under resources/bin on Linux.
+  local goose_bin_paths=(
+    "/usr/lib/goose/resources/bin"
+    "/usr/lib64/goose/resources/bin"
+    "/opt/Goose/resources/bin"
+    "/opt/goose/resources/bin"
+  )
+  local p
+  for p in "${goose_bin_paths[@]}"; do
+    if [[ -x "$p/npx" || -x "$p/node" ]]; then
+      export PATH="$p:$PATH"
+      log "using Goose-bundled node tools from $p"
+      break
+    fi
+  done
+
   if command -v npx >/dev/null 2>&1; then
     ASAR_EXTRACT=(npx --yes asar extract)
     ASAR_PACK=(npx --yes asar pack)
@@ -92,7 +123,7 @@ ensure_asar_tools() {
     ASAR_PACK=(asar pack)
     return 0
   fi
-  die "need Node.js npx (or global asar). Install Node 18+ then retry."
+  die "need Node.js npx (or global asar). Install Node 18+ then retry (or install Goose desktop which bundles npx)."
 }
 
 write_root() {

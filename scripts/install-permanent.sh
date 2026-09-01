@@ -59,15 +59,19 @@ RemainAfterExit=yes
 WantedBy=default.target
 EOF
 
+    # Resolve live asar path for the path unit (may differ by package layout).
     ASAR_PATH="/usr/lib/goose/resources/app.asar"
-    [[ -f "$ASAR_PATH" ]] || ASAR_PATH=""
+    if [[ ! -f "$ASAR_PATH" ]]; then
+      ASAR_PATH="$(find /usr/lib /usr/lib64 /opt -path '*/goose*/resources/app.asar' 2>/dev/null | head -1 || true)"
+    fi
+    ASAR_PATH="${ASAR_PATH:-/usr/lib/goose/resources/app.asar}"
     cat > "$HOME/.config/systemd/user/goose-cyberpunk-theme.path" <<EOF
 [Unit]
 Description=Watch Goose app.asar and re-apply cyberpunk theme
 
 [Path]
-PathModified=${ASAR_PATH:-/usr/lib/goose/resources/app.asar}
-PathChanged=${ASAR_PATH:-/usr/lib/goose/resources/app.asar}
+PathModified=${ASAR_PATH}
+PathChanged=${ASAR_PATH}
 Unit=goose-cyberpunk-theme.service
 
 [Install]
