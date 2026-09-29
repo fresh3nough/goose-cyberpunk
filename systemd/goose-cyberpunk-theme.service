@@ -1,5 +1,5 @@
 [Unit]
-Description=Apply Goose neon cyberpunk desktop theme
+Description=Apply Goose inverted neon cyberpunk desktop theme
 After=default.target
 
 [Service]

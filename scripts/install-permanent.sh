@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Make cyberpunk theme re-apply on login / if Goose is updated
+# Make inverted neon cyberpunk theme re-apply on login / if Goose is updated
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APPLY="$ROOT/scripts/apply-theme.sh"
@@ -47,7 +47,7 @@ EOF
 
     cat > "$HOME/.config/systemd/user/goose-cyberpunk-theme.service" <<EOF
 [Unit]
-Description=Apply Goose neon cyberpunk desktop theme
+Description=Apply Goose inverted neon cyberpunk desktop theme
 After=default.target
 
 [Service]
@@ -67,7 +67,7 @@ EOF
     ASAR_PATH="${ASAR_PATH:-/usr/lib/goose/resources/app.asar}"
     cat > "$HOME/.config/systemd/user/goose-cyberpunk-theme.path" <<EOF
 [Unit]
-Description=Watch Goose app.asar and re-apply cyberpunk theme
+Description=Watch Goose app.asar and re-apply inverted neon cyberpunk theme
 
 [Path]
 PathModified=${ASAR_PATH}
@@ -82,7 +82,7 @@ EOF
 [Desktop Entry]
 Type=Application
 Name=Goose Cyberpunk Theme
-Comment=Re-apply neon cyberpunk theme to Goose on login
+Comment=Re-apply inverted neon cyberpunk theme to Goose on login
 Exec=$APPLY
 X-GNOME-Autostart-enabled=true
 StartupNotify=false

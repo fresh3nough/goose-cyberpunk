@@ -1,210 +1,291 @@
-/* Goose Desktop — Neon Cyberpunk Theme
-   Scheme:
-   - Void bg: deep indigo-black
-   - User input: hot magenta / neon pink
-   - AI response: electric cyan
-   - Terminal/code: matrix lime on void
+/* Goose Desktop — Inverted Neon Cyberpunk Theme
+   Bright popping neon surfaces + bold black text (dark-on-neon invert).
+
+   Layout roles:
+   - Chat / main canvas: neon yellow
+   - Left sidebar: neon orange
+   - Input box: neon blue
+   - User / danger accents: neon red
+   - AI / info accents: neon blue
+   - Code / terminal panels: neon red surface, black mono
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap');
 
 :root,
 .dark,
 html.dark {
-  /* Core backgrounds */
-  --color-background-primary: #07070f !important;
-  --color-background-secondary: #0e0e1a !important;
-  --color-background-tertiary: #16162a !important;
-  --color-background-inverse: #f0e6ff !important;
+  /* Core backgrounds — bright neon surfaces */
+  --color-background-primary: #fff200 !important;      /* chat / main: neon yellow */
+  --color-background-secondary: #ffe600 !important;    /* panels */
+  --color-background-tertiary: #ffd400 !important;     /* elevated chips */
+  --color-background-inverse: #0a0a0a !important;
   --color-background-ghost: transparent !important;
-  --color-background-info: #00e5ff !important;
-  --color-background-danger: #ff2a6d !important;
+  --color-background-info: #00e5ff !important;         /* neon blue */
+  --color-background-danger: #ff2a2a !important;       /* neon red */
   --color-background-success: #39ff14 !important;
-  --color-background-warning: #fcee0a !important;
-  --color-background-disabled: #1a1a2e !important;
+  --color-background-warning: #ff6b00 !important;      /* neon orange */
+  --color-background-disabled: #ffe066 !important;
 
-  /* Text */
-  --color-text-primary: #e8f6ff !important;
-  --color-text-secondary: #8ab4c8 !important;
-  --color-text-tertiary: #5a7a8c !important;
-  --color-text-inverse: #07070f !important;
-  --color-text-ghost: #8ab4c8 !important;
-  --color-text-info: #00e5ff !important;
-  --color-text-danger: #ff2a6d !important;
-  --color-text-success: #39ff14 !important;
-  --color-text-warning: #fcee0a !important;
-  --color-text-disabled: #3d4f5c !important;
+  /* Text — bold black everywhere */
+  --color-text-primary: #0a0a0a !important;
+  --color-text-secondary: #1a1a1a !important;
+  --color-text-tertiary: #2a2a2a !important;
+  --color-text-inverse: #fff200 !important;
+  --color-text-ghost: #1a1a1a !important;
+  --color-text-info: #003844 !important;
+  --color-text-danger: #3b0000 !important;
+  --color-text-success: #062a00 !important;
+  --color-text-warning: #2a1000 !important;
+  --color-text-disabled: #4a4a4a !important;
 
-  /* Borders / rings — neon magenta + cyan */
-  --color-border-primary: #2a1a40 !important;
-  --color-border-secondary: #ff00aa55 !important;
-  --color-border-tertiary: #00e5ff44 !important;
-  --color-border-inverse: #f0e6ff !important;
+  /* Borders / rings */
+  --color-border-primary: #0a0a0a !important;
+  --color-border-secondary: #ff2a2acc !important;
+  --color-border-tertiary: #00b8d4aa !important;
+  --color-border-inverse: #fff200 !important;
   --color-border-ghost: transparent !important;
-  --color-border-info: #00e5ff !important;
-  --color-border-danger: #ff2a6d !important;
-  --color-border-success: #39ff14 !important;
-  --color-border-warning: #fcee0a !important;
-  --color-border-disabled: #1a1a2e !important;
+  --color-border-info: #007a8a !important;
+  --color-border-danger: #b30000 !important;
+  --color-border-success: #1a7a00 !important;
+  --color-border-warning: #b34a00 !important;
+  --color-border-disabled: #c9a800 !important;
 
-  --color-ring-primary: #ff00aa !important;
+  --color-ring-primary: #ff2a2a !important;
   --color-ring-secondary: #00e5ff !important;
-  --color-ring-inverse: #07070f !important;
+  --color-ring-inverse: #fff200 !important;
   --color-ring-info: #00e5ff !important;
-  --color-ring-danger: #ff2a6d !important;
+  --color-ring-danger: #ff2a2a !important;
   --color-ring-success: #39ff14 !important;
-  --color-ring-warning: #fcee0a !important;
+  --color-ring-warning: #ff6b00 !important;
 
-  /* Sidebar tokens */
-  --sidebar: #0a0a14 !important;
-  --sidebar-foreground: #e8f6ff !important;
-  --sidebar-primary: #ff00aa !important;
-  --sidebar-primary-foreground: #07070f !important;
-  --sidebar-accent: #16162a !important;
-  --sidebar-accent-foreground: #00e5ff !important;
-  --sidebar-border: #ff00aa33 !important;
-  --sidebar-ring: #00e5ff !important;
+  /* Sidebar — neon orange */
+  --sidebar: #ff6b00 !important;
+  --sidebar-foreground: #0a0a0a !important;
+  --sidebar-primary: #ff2a2a !important;
+  --sidebar-primary-foreground: #0a0a0a !important;
+  --sidebar-accent: #ff8a1a !important;
+  --sidebar-accent-foreground: #0a0a0a !important;
+  --sidebar-border: #0a0a0a !important;
+  --sidebar-ring: #0a0a0a !important;
 
-  --color-inline-code: #39ff14 !important;
-  --text-inverse: #07070f !important;
-  --text-danger: #ff2a6d !important;
+  --color-inline-code: #0a0a0a !important;
+  --text-inverse: #fff200 !important;
+  --text-danger: #3b0000 !important;
 
-  --shadow-default: 0 0 20px #ff00aa33, 0 0 40px #00e5ff22, 0 8px 24px #00000088 !important;
+  --shadow-default: 0 0 18px #ff2a2a44, 0 0 28px #00e5ff33, 0 8px 20px #00000033 !important;
 
-  /* Semantic roles used by this override */
-  --cp-user: #ff4fd8;
-  --cp-user-dim: #ff4fd8cc;
-  --cp-user-bg: #2a0a24;
-  --cp-user-border: #ff00aa88;
-  --cp-ai: #7df9ff;
-  --cp-ai-dim: #7df9ffbb;
-  --cp-ai-bg: #0a1a28;
-  --cp-ai-border: #00e5ff66;
-  --cp-term: #39ff14;
-  --cp-term-bg: #030508;
-  --cp-term-border: #39ff1466;
-  --cp-input: #ff9aef;
-  --cp-glow-magenta: 0 0 12px #ff00aa66, 0 0 24px #ff00aa33;
-  --cp-glow-cyan: 0 0 12px #00e5ff66, 0 0 24px #00e5ff33;
-  --cp-glow-lime: 0 0 10px #39ff1466;
+  /* Semantic roles */
+  --cp-user: #0a0a0a;
+  --cp-user-dim: #1a1a1acc;
+  --cp-user-bg: #ff2a2a;           /* neon red bubbles */
+  --cp-user-border: #0a0a0a;
+  --cp-ai: #0a0a0a;
+  --cp-ai-dim: #1a1a1abb;
+  --cp-ai-bg: #7df9ff;             /* neon blue / cyan AI */
+  --cp-ai-border: #0a0a0a;
+  --cp-term: #0a0a0a;
+  --cp-term-bg: #ff3355;           /* neon red terminal panel */
+  --cp-term-border: #0a0a0a;
+  --cp-input: #0a0a0a;             /* black typed text */
+  --cp-input-bg: #00e5ff;          /* neon blue input */
+  --cp-sidebar: #ff6b00;
+  --cp-chat: #fff200;
+  --cp-glow-red: 0 0 14px #ff2a2a88, 0 0 28px #ff2a2a44;
+  --cp-glow-blue: 0 0 14px #00e5ff88, 0 0 28px #00e5ff44;
+  --cp-glow-orange: 0 0 14px #ff6b0088, 0 0 24px #ff6b0044;
+  --cp-glow-yellow: 0 0 12px #fff20088;
 
   --default-font-family: "Rajdhani", "Ubuntu", "Noto Sans", ui-sans-serif, system-ui, sans-serif !important;
   --default-mono-font-family: "Share Tech Mono", "Ubuntu Mono", "DejaVu Sans Mono", ui-monospace, monospace !important;
 }
 
 html, body, #root {
-  background-color: #07070f !important;
-  color: #e8f6ff !important;
+  background-color: #fff200 !important; /* neon yellow main */
+  color: #0a0a0a !important;
   font-family: "Rajdhani", "Ubuntu", "Noto Sans", ui-sans-serif, system-ui, sans-serif !important;
   font-size: 17px !important;
+  font-weight: 700 !important;
   line-height: 1.55 !important;
   letter-spacing: 0.01em;
+}
+
+/* Force bold black text app-wide */
+html, body, #root,
+p, span, div, label, li, td, th, a, button,
+h1, h2, h3, h4, h5, h6,
+input, textarea, select,
+[class*="text-"],
+[data-slot] {
+  color: #0a0a0a;
+  font-weight: 700;
 }
 
 /* Headings / brand-ish UI */
 h1, h2, h3, .font-mono {
   font-family: "Orbitron", "Rajdhani", sans-serif !important;
   letter-spacing: 0.04em;
+  color: #0a0a0a !important;
+  font-weight: 800 !important;
 }
 
 /* Bump common text sizes a notch */
-.text-xs { font-size: 0.85rem !important; line-height: 1.35 !important; }
-.text-sm { font-size: 1rem !important; line-height: 1.5 !important; }
-.text-base { font-size: 1.125rem !important; line-height: 1.55 !important; }
-.text-lg { font-size: 1.25rem !important; line-height: 1.5 !important; }
-.text-xl { font-size: 1.4rem !important; line-height: 1.4 !important; }
-.text-2xl { font-size: 1.65rem !important; }
-.text-3xl { font-size: 2rem !important; }
-.text-6xl { font-size: 4rem !important; }
+.text-xs { font-size: 0.85rem !important; line-height: 1.35 !important; font-weight: 700 !important; }
+.text-sm { font-size: 1rem !important; line-height: 1.5 !important; font-weight: 700 !important; }
+.text-base { font-size: 1.125rem !important; line-height: 1.55 !important; font-weight: 700 !important; }
+.text-lg { font-size: 1.25rem !important; line-height: 1.5 !important; font-weight: 700 !important; }
+.text-xl { font-size: 1.4rem !important; line-height: 1.4 !important; font-weight: 700 !important; }
+.text-2xl { font-size: 1.65rem !important; font-weight: 800 !important; }
+.text-3xl { font-size: 2rem !important; font-weight: 800 !important; }
+.text-6xl { font-size: 4rem !important; font-weight: 800 !important; }
 
-/* Chat input — neon pink user typing */
+/* ---------- LEFT SIDEBAR — neon orange ---------- */
+[data-slot="sidebar"],
+[data-slot="sidebar-inner"],
+[data-slot="sidebar-container"],
+[data-sidebar="sidebar"],
+aside,
+nav[class*="sidebar"],
+.bg-sidebar {
+  background-color: #ff6b00 !important;
+  background-image: linear-gradient(180deg, #ff7a1a 0%, #ff6b00 40%, #ff5500 100%) !important;
+  color: #0a0a0a !important;
+  border-color: #0a0a0a !important;
+  box-shadow: inset -4px 0 0 #0a0a0a, var(--cp-glow-orange) !important;
+}
+[data-slot="sidebar"] *,
+[data-slot="sidebar-inner"] *,
+[data-slot="sidebar-container"] *,
+[data-sidebar="sidebar"] *,
+.bg-sidebar * {
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+}
+[data-slot="sidebar-gap"] + * {
+  border-color: #0a0a0a !important;
+}
+[data-slot="sidebar-menu-button"]:hover,
+.sidebar-item:hover,
+[data-slot="sidebar-menu-button"][data-active="true"],
+[data-active="true"] {
+  background: #ff2a2a !important;
+  box-shadow: inset 4px 0 0 #0a0a0a, 0 0 12px #ff2a2a66 !important;
+  color: #0a0a0a !important;
+  font-weight: 800 !important;
+}
+
+/* ---------- CHAT AREA — neon yellow ---------- */
+main,
+[role="main"],
+.flex-1.overflow-hidden,
+[class*="chat-view"],
+[class*="messages"] {
+  background-color: #fff200 !important;
+  color: #0a0a0a !important;
+}
+
+/* ---------- INPUT BOX — neon blue ---------- */
 #dynamic-textarea,
 textarea[data-testid="chat-input"],
 textarea {
-  color: var(--cp-input) !important;
-  caret-color: #ff00aa !important;
+  color: #0a0a0a !important;
+  caret-color: #ff2a2a !important;
   font-family: "Rajdhani", sans-serif !important;
   font-size: 1.1rem !important;
-  font-weight: 500 !important;
-  text-shadow: 0 0 8px #ff00aa44;
+  font-weight: 700 !important;
+  background-color: #00e5ff !important;
+  border: 2px solid #0a0a0a !important;
+  border-radius: 0.65rem !important;
+  box-shadow: var(--cp-glow-blue) !important;
+  text-shadow: none !important;
 }
 #dynamic-textarea::placeholder,
 textarea[data-testid="chat-input"]::placeholder,
 textarea::placeholder {
-  color: #ff4fd888 !important;
-  opacity: 0.7 !important;
+  color: #003844 !important;
+  opacity: 0.75 !important;
+  font-weight: 700 !important;
 }
 
-/* Input container glow */
+/* Input container glow — neon blue frame on yellow chat */
 [data-drop-zone="true"],
 .bg-background-primary.z-10 {
-  border-color: #ff00aa55 !important;
-  box-shadow: inset 0 0 30px #ff00aa0d, 0 0 18px #00e5ff15 !important;
-  background: linear-gradient(180deg, #0e0e1a 0%, #0a0814 100%) !important;
+  border: 2px solid #0a0a0a !important;
+  border-color: #0a0a0a !important;
+  box-shadow: inset 0 0 24px #00e5ff55, var(--cp-glow-blue) !important;
+  background: linear-gradient(180deg, #00e5ff 0%, #00c8e0 100%) !important;
 }
 
-/* USER messages — hot magenta */
+/* USER messages — neon red surfaces, black bold text */
 .user-message,
 .user-message-bubble,
 .user .goose-message,
 [class*="user-message"] {
-  color: var(--cp-user) !important;
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
 }
 .user-message-bubble,
 .dark .user-message-bubble {
-  background: linear-gradient(135deg, #2a0a24 0%, #1a0820 100%) !important;
-  border: 1px solid var(--cp-user-border) !important;
-  box-shadow: var(--cp-glow-magenta) !important;
-  color: #ffb3ec !important;
+  background: linear-gradient(135deg, #ff2a2a 0%, #ff4444 100%) !important;
+  border: 2px solid #0a0a0a !important;
+  box-shadow: var(--cp-glow-red) !important;
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
   border-radius: 0.85rem !important;
 }
 .dark .user-message :is(h1,h2,h3,h4,h5,h6,strong),
 .user-message :is(h1,h2,h3,h4,h5,h6,strong) {
-  color: #ff7ae8 !important;
-  text-shadow: 0 0 8px #ff00aa55;
+  color: #0a0a0a !important;
+  font-weight: 800 !important;
+  text-shadow: none;
 }
 .dark .user-message li,
-.user-message li { color: #ffc2f0 !important; }
+.user-message li { color: #0a0a0a !important; font-weight: 700 !important; }
 .dark .user-message a,
-.user-message a { color: #ff9aef !important; }
+.user-message a { color: #001a22 !important; font-weight: 800 !important; text-decoration: underline; }
 
-/* AI / agent responses — electric cyan */
+/* AI / agent responses — neon blue surfaces, black bold text */
 .agent-message,
 .agent-message-bubble,
 .assistant .goose-message,
 [class*="agent-message"],
 .assistant {
-  color: var(--cp-ai) !important;
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
 }
 .agent-message-bubble,
 .dark .agent-message-bubble {
-  background: linear-gradient(135deg, #0a1a28 0%, #0a121c 100%) !important;
-  border: 1px solid var(--cp-ai-border) !important;
-  box-shadow: var(--cp-glow-cyan) !important;
-  color: #c8f7ff !important;
+  background: linear-gradient(135deg, #7df9ff 0%, #00e5ff 100%) !important;
+  border: 2px solid #0a0a0a !important;
+  box-shadow: var(--cp-glow-blue) !important;
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
   border-radius: 0.85rem !important;
   padding: 0.75rem 1.1rem !important;
 }
 
-/* Prose / markdown body in AI replies */
+/* Prose / markdown body */
 .prose, .prose p, .prose li {
-  color: #d4f4ff !important;
+  color: #0a0a0a !important;
   font-size: 1.05em !important;
+  font-weight: 700 !important;
 }
 .prose h1, .prose h2, .prose h3, .prose h4 {
-  color: #7df9ff !important;
+  color: #0a0a0a !important;
   font-family: "Orbitron", "Rajdhani", sans-serif !important;
-  text-shadow: 0 0 10px #00e5ff44;
+  font-weight: 800 !important;
+  text-shadow: none;
 }
-.prose a { color: #00e5ff !important; text-shadow: 0 0 6px #00e5ff55; }
-.prose strong { color: #ffffff !important; }
+.prose a { color: #003844 !important; font-weight: 800 !important; text-decoration: underline; text-shadow: none; }
+.prose strong { color: #0a0a0a !important; font-weight: 800 !important; }
 .prose blockquote {
-  border-left-color: #ff00aa !important;
-  color: #b8e0f0 !important;
-  background: #12081a55;
+  border-left: 4px solid #ff2a2a !important;
+  color: #0a0a0a !important;
+  background: #ff6b0033;
+  font-weight: 700 !important;
 }
 
-/* Terminal / code blocks — matrix lime */
+/* Terminal / code blocks — neon red panel, black mono */
 .prose pre,
 pre,
 .katex-display,
@@ -212,94 +293,94 @@ pre,
 code[class*="language-"],
 pre[class*="language-"] {
   background-color: var(--cp-term-bg) !important;
-  color: var(--cp-term) !important;
-  border: 1px solid var(--cp-term-border) !important;
-  box-shadow: var(--cp-glow-lime), inset 0 0 40px #39ff1408 !important;
+  color: #0a0a0a !important;
+  border: 2px solid #0a0a0a !important;
+  box-shadow: var(--cp-glow-red), inset 0 0 20px #00000018 !important;
   font-family: "Share Tech Mono", "Ubuntu Mono", monospace !important;
   font-size: 0.95rem !important;
+  font-weight: 700 !important;
   border-radius: 0.5rem !important;
 }
 .prose code,
 code,
 .bg-inline-code,
 .dark .bg-inline-code {
-  background-color: #0a120a !important;
-  color: #39ff14 !important;
-  border: 1px solid #39ff1433 !important;
+  background-color: #ff6b00 !important;
+  color: #0a0a0a !important;
+  border: 1px solid #0a0a0a !important;
   font-family: "Share Tech Mono", "Ubuntu Mono", monospace !important;
   font-size: 0.95em !important;
-  text-shadow: 0 0 6px #39ff1444;
+  font-weight: 700 !important;
+  text-shadow: none;
 }
 pre code, .prose pre code {
   background: transparent !important;
   border: none !important;
-  color: #39ff14 !important;
+  color: #0a0a0a !important;
   text-shadow: none !important;
   font-size: 0.95rem !important;
+  font-weight: 700 !important;
 }
 
-/* Scrollbars neon */
-* { scrollbar-color: #ff00aa88 transparent !important; }
+/* Scrollbars — red → blue neon */
+* { scrollbar-color: #ff2a2a #fff200 !important; }
+::-webkit-scrollbar-track { background: #fff200 !important; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff00aa, #00e5ff) !important;
+  background: linear-gradient(180deg, #ff2a2a, #00e5ff) !important;
   border-radius: 8px !important;
-  box-shadow: 0 0 8px #ff00aa88;
+  border: 1px solid #0a0a0a !important;
+  box-shadow: 0 0 8px #ff2a2a88;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff00aa, #00e5ff) !important;
+  background: linear-gradient(180deg, #ff2a2a, #00e5ff) !important;
 }
 
-/* Sidebar cyber panel */
-[data-slot="sidebar-container"],
-[data-slot="sidebar-gap"] + * {
-  border-color: #ff00aa33 !important;
-}
-[data-slot="sidebar-menu-button"]:hover,
-.sidebar-item:hover {
-  background: #16162a !important;
-  box-shadow: inset 3px 0 0 #00e5ff, 0 0 12px #00e5ff22;
-  color: #7df9ff !important;
-}
-
-/* Buttons — neon edges */
+/* Buttons — bold black on neon */
 button, [role="button"] {
   font-family: "Rajdhani", sans-serif !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
   letter-spacing: 0.03em;
+  color: #0a0a0a !important;
 }
 button:focus-visible, [role="button"]:focus-visible {
-  outline: 2px solid #00e5ff !important;
-  box-shadow: 0 0 12px #00e5ff66 !important;
+  outline: 3px solid #0a0a0a !important;
+  box-shadow: 0 0 14px #00e5ff88 !important;
 }
 
-/* Cards / panels */
+/* Cards / panels on yellow canvas */
 .rounded-2xl.border,
 [class*="bg-background-primary"].border {
-  border-color: #ff00aa44 !important;
-  box-shadow: 0 0 24px #00e5ff12, inset 0 0 0 1px #ff00aa18;
+  background-color: #ffe600 !important;
+  border: 2px solid #0a0a0a !important;
+  border-color: #0a0a0a !important;
+  box-shadow: 0 0 18px #ff6b0033, inset 0 0 0 1px #ff2a2a22;
+  color: #0a0a0a !important;
 }
 
 /* Loading / thinking indicator */
 [data-testid="loading-indicator"] {
-  color: #00e5ff !important;
-  text-shadow: 0 0 10px #00e5ff88;
+  color: #0a0a0a !important;
+  text-shadow: none;
   font-size: 1rem !important;
+  font-weight: 800 !important;
 }
 
 /* Hub clock greeting */
 .text-6xl.font-light {
   font-family: "Orbitron", sans-serif !important;
-  color: #7df9ff !important;
-  text-shadow: 0 0 20px #00e5ff88, 0 0 40px #ff00aa44;
+  color: #0a0a0a !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 12px #ff6b0066, 0 0 24px #ff2a2a33;
 }
 .text-xl.text-text-secondary {
-  color: #ff4fd8 !important;
+  color: #0a0a0a !important;
   font-family: "Rajdhani", sans-serif !important;
   font-size: 1.35rem !important;
-  text-shadow: 0 0 10px #ff00aa55;
+  font-weight: 700 !important;
+  text-shadow: none;
 }
 
-/* Subtle scanline overlay on body (very light) */
+/* Soft paper grain instead of dark scanlines */
 body::after {
   content: "";
   pointer-events: none;
@@ -309,22 +390,33 @@ body::after {
   background: repeating-linear-gradient(
     0deg,
     transparent,
-    transparent 2px,
-    rgba(0, 229, 255, 0.015) 3px
+    transparent 3px,
+    rgba(10, 10, 10, 0.02) 4px
   );
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
 }
 
-/* Selection */
+/* Selection — neon red highlight, black text */
 ::selection {
-  background: #ff00aa88;
-  color: #ffffff;
+  background: #ff2a2a;
+  color: #0a0a0a;
 }
 
 /* Toast / alerts */
 .Toastify__toast {
   font-family: "Rajdhani", sans-serif !important;
   font-size: 1rem !important;
-  border: 1px solid #00e5ff55 !important;
-  box-shadow: 0 0 20px #00e5ff33 !important;
+  font-weight: 700 !important;
+  color: #0a0a0a !important;
+  background: #00e5ff !important;
+  border: 2px solid #0a0a0a !important;
+  box-shadow: 0 0 20px #00e5ff55 !important;
+}
+
+/* Inputs generally */
+input, select {
+  background-color: #00e5ff !important;
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+  border: 2px solid #0a0a0a !important;
 }

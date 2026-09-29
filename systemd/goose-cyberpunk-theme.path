@@ -1,5 +1,5 @@
 [Unit]
-Description=Watch Goose app.asar and re-apply cyberpunk theme
+Description=Watch Goose app.asar and re-apply inverted neon cyberpunk theme
 
 [Path]
 PathModified=/usr/lib/goose/resources/app.asar

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Apply neon cyberpunk theme to Goose desktop (Linux + macOS)
+# Apply inverted neon cyberpunk theme to Goose desktop (Linux + macOS)
+# Bright neon surfaces + bold black text
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -238,9 +239,9 @@ replacements = [
 # Generic: after computing isDark, force dark class
 html2 = re.sub(
     r"if\s*\(\s*isDark\s*\)\s*\{\s*document\.documentElement\.classList\.add\('dark'\);\s*document\.documentElement\.style\.colorScheme\s*=\s*'dark';\s*\}\s*else\s*\{\s*document\.documentElement\.classList\.remove\('dark'\);\s*document\.documentElement\.style\.colorScheme\s*=\s*'light';\s*\}",
-    """// Cyberpunk override: always dark neon
+    """// Cyberpunk override: force themed class (inverted neon CSS hooks .dark)
               document.documentElement.classList.add('dark');
-              document.documentElement.style.colorScheme = 'dark';
+              document.documentElement.style.colorScheme = 'light';
               try {
                 localStorage.setItem('theme', 'dark');
                 localStorage.setItem('use_system_theme', 'false');
@@ -254,10 +255,10 @@ if html2 == html:
         html2 = html.replace(
             "function initializeTheme() {",
             """function initializeTheme() {
-          // Cyberpunk override: always dark neon
+          // Cyberpunk override: force themed class (inverted neon CSS hooks .dark)
           try {
             document.documentElement.classList.add('dark');
-            document.documentElement.style.colorScheme = 'dark';
+            document.documentElement.style.colorScheme = 'light';
             if (window.localStorage) {
               localStorage.setItem('theme', 'dark');
               localStorage.setItem('use_system_theme', 'false');
@@ -292,65 +293,75 @@ from pathlib import Path
 assets = Path(sys.argv[1])
 
 cyber = {
-  "--color-background-primary": "#07070f",
-  "--color-background-secondary": "#0e0e1a",
-  "--color-background-tertiary": "#16162a",
-  "--color-background-inverse": "#f0e6ff",
+  # inverted neon: bright surfaces + bold black text
+  "--color-background-primary": "#fff200",
+  "--color-background-secondary": "#ffe600",
+  "--color-background-tertiary": "#ffd400",
+  "--color-background-inverse": "#0a0a0a",
   "--color-background-ghost": "transparent",
   "--color-background-info": "#00e5ff",
-  "--color-background-danger": "#ff2a6d",
+  "--color-background-danger": "#ff2a2a",
   "--color-background-success": "#39ff14",
-  "--color-background-warning": "#fcee0a",
-  "--color-background-disabled": "#1a1a2e",
-  "--color-text-primary": "#e8f6ff",
-  "--color-text-secondary": "#8ab4c8",
-  "--color-text-tertiary": "#5a7a8c",
-  "--color-text-inverse": "#07070f",
-  "--color-text-ghost": "#8ab4c8",
-  "--color-text-info": "#00e5ff",
-  "--color-text-danger": "#ff2a6d",
-  "--color-text-success": "#39ff14",
-  "--color-text-warning": "#fcee0a",
-  "--color-text-disabled": "#3d4f5c",
-  "--color-border-primary": "#2a1a40",
-  "--color-border-secondary": "#525b68",
-  "--color-border-tertiary": "#474e57",
-  "--color-border-inverse": "#f0e6ff",
+  "--color-background-warning": "#ff6b00",
+  "--color-background-disabled": "#ffe066",
+  "--color-text-primary": "#0a0a0a",
+  "--color-text-secondary": "#1a1a1a",
+  "--color-text-tertiary": "#2a2a2a",
+  "--color-text-inverse": "#fff200",
+  "--color-text-ghost": "#1a1a1a",
+  "--color-text-info": "#003844",
+  "--color-text-danger": "#3b0000",
+  "--color-text-success": "#062a00",
+  "--color-text-warning": "#2a1000",
+  "--color-text-disabled": "#4a4a4a",
+  "--color-border-primary": "#0a0a0a",
+  "--color-border-secondary": "#ff2a2a",
+  "--color-border-tertiary": "#00b8d4",
+  "--color-border-inverse": "#fff200",
   "--color-border-ghost": "transparent",
-  "--color-border-info": "#00e5ff",
-  "--color-border-danger": "#ff2a6d",
-  "--color-border-success": "#39ff14",
-  "--color-border-warning": "#fcee0a",
-  "--color-border-disabled": "#1a1a2e",
-  "--color-ring-primary": "#ff00aa",
+  "--color-border-info": "#007a8a",
+  "--color-border-danger": "#b30000",
+  "--color-border-success": "#1a7a00",
+  "--color-border-warning": "#b34a00",
+  "--color-border-disabled": "#c9a800",
+  "--color-ring-primary": "#ff2a2a",
   "--color-ring-secondary": "#00e5ff",
-  "--color-ring-inverse": "#07070f",
+  "--color-ring-inverse": "#fff200",
   "--color-ring-info": "#00e5ff",
-  "--color-ring-danger": "#ff2a6d",
+  "--color-ring-danger": "#ff2a2a",
   "--color-ring-success": "#39ff14",
-  "--color-ring-warning": "#fcee0a",
-  "--shadow-hairline": "0 0 0 1px rgba(255, 0, 170, 0.2)",
-  "--shadow-sm": "0 0 8px rgba(0, 229, 255, 0.25)",
-  "--shadow-md": "0 0 16px rgba(255, 0, 170, 0.25), 0 4px 12px rgba(0,0,0,0.4)",
-  "--shadow-lg": "0 0 28px rgba(0, 229, 255, 0.3), 0 10px 24px rgba(0,0,0,0.5)",
+  "--color-ring-warning": "#ff6b00",
+  "--shadow-hairline": "0 0 0 2px rgba(10, 10, 10, 0.85)",
+  "--shadow-sm": "0 0 10px rgba(0, 229, 255, 0.45)",
+  "--shadow-md": "0 0 16px rgba(255, 42, 42, 0.35), 0 4px 12px rgba(0,0,0,0.2)",
+  "--shadow-lg": "0 0 28px rgba(255, 107, 0, 0.4), 0 10px 24px rgba(0,0,0,0.25)",
 }
 obj = "{" + ",".join(f'"{k}":"{v}"' for k, v in cyber.items()) + "}"
 
 # Match known stock dark/light token objects by distinctive first colors
+# Also match previous cyberpunk dark void + inverted neon so re-apply upgrades cleanly.
 patterns = [
     # dark stock
     r'\{"--color-background-primary":"#22252a".*?"--shadow-lg":"[^"]*"\}',
     # light stock
     r'\{"--color-background-primary":"#ffffff".*?"--shadow-lg":"[^"]*"\}',
-    # already cyber / alternate dark greys sometimes used
+    # previous void cyberpunk
     r'\{"--color-background-primary":"#07070f".*?"--shadow-lg":"[^"]*"\}',
+    # already inverted neon (this theme)
+    r'\{"--color-background-primary":"#fff200".*?"--shadow-lg":"[^"]*"\}',
 ]
 
 bubble_reps = [
+    # stock dark
     (".dark .user-message-bubble{color:#d2dae6;background-color:#171d30}",
-     ".dark .user-message-bubble{color:#ffb3ec;background-color:#2a0a24;border:1px solid #ff00aa88;box-shadow:0 0 12px #ff00aa44}"),
+     ".dark .user-message-bubble{color:#0a0a0a;background-color:#ff2a2a;border:2px solid #0a0a0a;box-shadow:0 0 14px #ff2a2a88;font-weight:700}"),
     (".dark .agent-message-bubble{background-color:#1f2126;border-radius:.75rem;padding:.625rem 1rem}",
-     ".dark .agent-message-bubble{background-color:#0a1a28;border:1px solid #00e5ff66;border-radius:.75rem;padding:.625rem 1rem;box-shadow:0 0 12px #00e5ff44;color:#c8f7ff}"),
+     ".dark .agent-message-bubble{background-color:#7df9ff;border:2px solid #0a0a0a;border-radius:.75rem;padding:.625rem 1rem;box-shadow:0 0 14px #00e5ff88;color:#0a0a0a;font-weight:700}"),
+    # previous void cyberpunk bubbles → inverted
+    (".dark .user-message-bubble{color:#ffb3ec;background-color:#2a0a24;border:1px solid #ff00aa88;box-shadow:0 0 12px #ff00aa44}",
+     ".dark .user-message-bubble{color:#0a0a0a;background-color:#ff2a2a;border:2px solid #0a0a0a;box-shadow:0 0 14px #ff2a2a88;font-weight:700}"),
+    (".dark .agent-message-bubble{background-color:#0a1a28;border:1px solid #00e5ff66;border-radius:.75rem;padding:.625rem 1rem;box-shadow:0 0 12px #00e5ff44;color:#c8f7ff}",
+     ".dark .agent-message-bubble{background-color:#7df9ff;border:2px solid #0a0a0a;border-radius:.75rem;padding:.625rem 1rem;box-shadow:0 0 14px #00e5ff88;color:#0a0a0a;font-weight:700}"),
 ]
 
 count_files = 0
@@ -430,7 +441,7 @@ main() {
   "applied_at": "$(date -Iseconds 2>/dev/null || date)"
 }
 EOF
-  log "SUCCESS: cyberpunk theme applied. Restart Goose to see it."
+  log "SUCCESS: inverted neon cyberpunk theme applied (bright neon + bold black text). Restart Goose to see it."
   echo
   echo "Restart Goose completely (quit + reopen) to load the theme."
   echo "Backup: $BACKUP_DIR/app.asar.stock"

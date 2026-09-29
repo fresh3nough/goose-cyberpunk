@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Goose Cyberpunk Theme
-Comment=Re-apply neon cyberpunk theme to Goose on login
+Comment=Re-apply inverted neon cyberpunk theme to Goose on login
 Exec=REPLACE_WITH_REPO_PATH/scripts/apply-theme.sh
 X-GNOME-Autostart-enabled=true
 StartupNotify=false

@@ -2,9 +2,20 @@
 
 # goose-cyberpunk
 
-Neon cyberpunk theme for the [Goose](https://github.com/block/goose) desktop app.
+**Inverted neon cyberpunk** theme for the [Goose](https://github.com/block/goose) desktop app.
 
-Deep void backgrounds, **magenta user input**, **cyan AI replies**, **lime terminal/code**, larger type, and Orbitron / Rajdhani / Share Tech Mono fonts.
+Bright popping neon surfaces with **bold black text** — the classic dark void theme flipped inside-out.
+
+| Zone | Neon |
+|------|------|
+| Left sidebar | **orange** `#ff6b00` |
+| Chat area | **yellow** `#fff200` |
+| Input box | **blue** `#00e5ff` |
+| User bubbles | **red** `#ff2a2a` |
+| AI bubbles | **cyan-blue** `#7df9ff` |
+| All text | **bold black** `#0a0a0a` |
+
+Orbitron / Rajdhani / Share Tech Mono fonts, larger type, hard black outlines, and neon glows.
 
 Works on **Linux** and **macOS**. Patches Goose’s packaged Electron `app.asar` (with automatic stock backup). On macOS, the installer also refreshes Electron’s ASAR-integrity metadata and re-signs the app locally; this is required by current Goose releases.
 
@@ -16,11 +27,13 @@ Works on **Linux** and **macOS**. Patches Goose’s packaged Electron `app.asar`
 
 | Element | Color |
 |---------|-------|
-| App background | `#07070f` void |
-| You type | `#ff9aef` neon pink |
-| Your messages | `#ff4fd8` magenta glow |
-| Goose replies | `#7df9ff` electric cyan |
-| Code / terminal | `#39ff14` matrix lime |
+| Chat / app background | `#fff200` neon yellow |
+| Left sidebar | `#ff6b00` neon orange |
+| Input box | `#00e5ff` neon blue |
+| Typed + UI text | `#0a0a0a` bold black |
+| Your messages | `#ff2a2a` neon red |
+| Goose replies | `#7df9ff` neon blue |
+| Code / terminal panel | `#ff3355` neon red-pink |
 
 Full token table: [`docs/color-scheme.md`](docs/color-scheme.md)
 
@@ -107,11 +120,11 @@ Stock backup is saved on first apply to:
 2. Backs up the stock asar
 3. Extracts the archive
 4. Copies [`theme/cyberpunk-neon.css`](theme/cyberpunk-neon.css) into the renderer assets
-5. Patches `index.html` to force dark mode and load the CSS
-6. Rewrites light/dark CSS variable token maps in the JS bundles to cyberpunk colors
+5. Patches `index.html` to force the themed class and load the CSS
+6. Rewrites light/dark CSS variable token maps in the JS bundles to inverted neon colors
 7. Tweaks user/agent message bubble styles when the stock strings are present
 8. Repacks and installs the asar
-9. Writes Goose `settings.json` with `theme: dark` and `useSystemTheme: false`
+9. Writes Goose `settings.json` with `theme: dark` and `useSystemTheme: false` (CSS still hooks `.dark`)
 
 ### Settings paths
 
@@ -128,7 +141,7 @@ Stock backup is saved on first apply to:
 goose-cyberpunk/
 ├── README.md
 ├── theme/
-│   ├── cyberpunk-neon.css   # main stylesheet
+│   ├── cyberpunk-neon.css   # main stylesheet (inverted neon)
 │   └── theme.json           # metadata + palette
 ├── scripts/
 │   ├── apply-theme.sh       # cross-platform patcher
