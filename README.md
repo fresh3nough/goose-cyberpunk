@@ -1,3 +1,5 @@
+![goose-cyberpunk UI](docs/ui-screenshot.png)
+
 # goose-cyberpunk
 
 Neon cyberpunk theme for the [Goose](https://github.com/block/goose) desktop app.
